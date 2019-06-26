@@ -13,8 +13,8 @@
 
 #include <list>
 #include <map>
-#include "cv.h"
-#include "highgui.h"
+#include "opencv/cv.h"
+#include "opencv/highgui.h"
 extern "C" {
 #include "libavcodec/avcodec.h"
 #include "libavformat/avformat.h"

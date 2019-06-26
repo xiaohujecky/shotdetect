@@ -109,7 +109,8 @@ void Hist::calculate() {
       ROI.x = j * ROI.width;
       cvSetImageROI(image, ROI);
       cvCvtColor(image, hsvframe, CV_BGR2HSV);
-      cvCvtPixToPlane(hsvframe, h_plane, s_plane, v_plane, 0);
+      //cvCvtPixToPlane(hsvframe, h_plane, s_plane, v_plane, 0);
+      cvSplit(hsvframe, h_plane, s_plane, v_plane, 0);
       cvCalcHist(planes, hist[i * grid.x + j]);
     }
   }

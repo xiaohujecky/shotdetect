@@ -16,7 +16,7 @@
 using std::list;
 using std::string;
 
-#include "cv.h"
+#include "opencv/cv.h"
 
 #include "hist.hpp"
 #include "video.hpp"

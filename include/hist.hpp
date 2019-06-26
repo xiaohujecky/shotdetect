@@ -11,8 +11,8 @@
 #ifndef _HISTOGRAM_H_
 #define _HISTOGRAM_H_
 
-#include "cv.h"
-#include "highgui.h"
+#include "opencv/cv.h"
+#include "opencv/highgui.h"
 
 struct Grid {
   int x;

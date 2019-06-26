@@ -16,7 +16,7 @@
 extern "C" {
 #include <stdint.h>
 }
-#include "cv.h"
+#include "opencv/cv.h"
 
 #include "video.hpp"
 #include "logger.hpp"
@@ -142,11 +142,11 @@ bool Video::open(const char *fn) {
 
   pFrame = av_frame_alloc();
   pFrameRGB = av_frame_alloc();
-  buffer = new uint8_t[avpicture_get_size(PIX_FMT_RGB24, width, height)];
-  avpicture_fill((AVPicture *)pFrameRGB, buffer, PIX_FMT_RGB24, width, height);
+  buffer = new uint8_t[avpicture_get_size(AV_PIX_FMT_RGB24, width, height)];
+  avpicture_fill((AVPicture *)pFrameRGB, buffer, AV_PIX_FMT_RGB24, width, height);
   img_convert_ctx =
       sws_getContext(originalWidth, originalHeight, pCodecCtx->pix_fmt, width,
-                     height, PIX_FMT_RGB24, SWS_BICUBIC, NULL, NULL, NULL);
+                     height, AV_PIX_FMT_RGB24, SWS_BICUBIC, NULL, NULL, NULL);
 
   // avformat_seek_file(pFormatCtx, -1, (-9223372036854775807L-1), 0,
   // 9223372036854775807L, AVSEEK_FLAG_FRAME);
