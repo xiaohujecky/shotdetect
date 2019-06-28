@@ -10,13 +10,18 @@
 
 #include "shotdetector.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 int main(int argc, char *argv[]) {
+
+  Clock::time_point start = Clock::now();
   ShotDetector sd(argv, argc);
 
   sd.run();
+  print_elapsed_time(start, "Shot detection:");
 
   sd.outputKeyFrame();
 
+  print_elapsed_time(start, "Shot-Keyframe:");
   return 0;
 }
