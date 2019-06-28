@@ -2,6 +2,7 @@
 #include <list>
 #include "bithreshold.hpp"
 #include "option.hpp"
+#include "tools.hpp"
 
 using std::set;
 using dms::Option;
@@ -220,4 +221,22 @@ bool BiThreshold::detect() {
   shotBoundary.push_back(pair<float, float>(begin, last));
 
   return true;
+}
+
+bool BiThreshold::output_shot_boundary(std::string &shot_filename){
+    std::list<pair<float, float> >::iterator shot_idx;
+    if (shotBoundary.size() == 0)
+        return false;
+    ofstream out_file;
+    out_file.open(shot_filename.c_str(), ios::out);
+    int shot_num = 0;
+    for (shot_idx = shotBoundary.begin(); shot_idx != shotBoundary.end(); shot_idx++ ){
+        float shot_start = (*shot_idx).first;
+        float shot_end = (*shot_idx).second;
+        cout << "Shot: " << shot_num << ", start: " << second2string(shot_start, "hh:mm:ss.mss") << ", end: " << second2string(shot_end, "hh:mm:ss.mss") << endl;
+        out_file << "Shot: " << shot_num << ", start: " << second2string(shot_start, "hh:mm:ss.mss") << ", end: " << second2string(shot_end, "hh:mm:ss.mss") << endl;
+        shot_num ++;
+    }
+    out_file.close();
+    return true;
 }
