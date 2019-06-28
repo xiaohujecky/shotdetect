@@ -28,6 +28,7 @@ public:
   virtual ~BiThreshold();
 
   virtual bool detect();
+  bool output_shot_boundary(std::string &shot_filename);
 
 private:
   /**
