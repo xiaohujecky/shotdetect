@@ -45,6 +45,8 @@ ShotDetector::ShotDetector(char **argv, int argc) {
 
   op.add_string("-o", "The path you want to output");
 
+  op.add_string("--shot_idx", "The path you want to output");
+
   op.add_bool("--help", "show help infomation");
 
   if (op.parse(argc, argv, true) != true) {
@@ -67,6 +69,8 @@ ShotDetector::ShotDetector(char **argv, int argc) {
    */
 
   outputPath = op.get_string("-o");
+
+  shots_outputPath = op.get_string("--shot_idx");
 
   videoFilePath = op.get_string("-i");
 
@@ -91,7 +95,10 @@ bool ShotDetector::run() {
     LOG_FATAL("can not detect shots before specifying the algorithm");
   }
 
-  return alg->detect();
+  bool detect_res = alg->detect();
+  bool shots_detect = ((BiThreshold *)alg)->output_shot_boundary(shots_outputPath);
+  cout << "The shots detect: " << shots_detect << ", output path: " << shots_outputPath << endl;
+  return detect_res;
 }
 
 bool ShotDetector::outputKeyFrame() {
